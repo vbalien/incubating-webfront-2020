@@ -11,5 +11,5 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true
   },
-  "includes": ["./typings/**/*.d.ts"]
+  "includes": ["./src/**/*.d.ts"]
 }

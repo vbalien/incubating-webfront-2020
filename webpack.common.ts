@@ -49,7 +49,11 @@ const config: webpack.Configuration = {
         },
       },
       {
-        test: /\.(png|ico|ttf|woff2?|eot|otf|svg)$/,
+        test: /\.svg$/,
+        use: ["@svgr/webpack", "url-loader"],
+      },
+      {
+        test: /\.(png|ico|ttf|woff2?|eot|otf)$/,
         loader: "file-loader",
       },
       {
