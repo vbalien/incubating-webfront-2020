@@ -9,12 +9,27 @@ export default {
   title: "components/Button",
 } as Meta;
 
-export const Default: Story<ButtonProps> = (props) => {
-  return <Button {...props}>일반 버튼</Button>;
+const Template: Story<ButtonProps> = (props) => {
+  return <Button {...props}>버튼</Button>;
 };
 
-export const RoundedButton: Story<unknown> = () => {
-  return <Button rounded>둥근 버튼</Button>;
+export const Default = Template.bind({});
+
+export const PrimaryButton = Template.bind({});
+PrimaryButton.args = {
+  primary: true,
+};
+export const RoundedButton = Template.bind({});
+RoundedButton.args = {
+  rounded: true,
+};
+export const FlatButton = Template.bind({});
+FlatButton.args = {
+  flat: true,
+};
+export const ShadowButton = Template.bind({});
+ShadowButton.args = {
+  shadow: true,
 };
 
 export const ButtonWithIcon: Story<unknown> = () => {
@@ -25,7 +40,7 @@ export const ButtonWithIcon: Story<unknown> = () => {
         {"아이콘과 텍스트"}
       </Button>
       <br />
-      <Button rounded>
+      <Button rounded width={45} height={45}>
         {/** 둥근 아이콘 버튼 */}
         <Icon icon="plus" />
       </Button>

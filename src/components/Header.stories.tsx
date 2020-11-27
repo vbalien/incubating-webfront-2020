@@ -8,6 +8,8 @@ export default {
   title: "components/Header",
 } as Meta;
 
-export const Default: Story<HeaderProps> = () => {
-  return <Header />;
+const Template: Story<HeaderProps> = (props) => {
+  return <Header {...props} />;
 };
+
+export const Default = Template.bind({});
