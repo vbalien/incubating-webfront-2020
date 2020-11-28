@@ -4,7 +4,7 @@ import React, { FC } from "react";
 
 const Sidebar: FC = () => {
   return (
-    <nav
+    <aside
       css={{
         width: "auto",
         border: "1px solid #ccc",
@@ -18,13 +18,14 @@ const Sidebar: FC = () => {
       <Button
         primary
         rounded
+        shadow
         width={45}
         height={45}
         css={{ position: "absolute", bottom: 10, right: 10 }}
       >
         <Icon icon="plus" />
       </Button>
-    </nav>
+    </aside>
   );
 };
 export default Sidebar;
