@@ -110,6 +110,8 @@ export type MemoListProps = {
   onSelected?: (idx: number, item: MemoItem) => void;
   /** 선택된 항목 ID 설정 */
   selectedItemId?: number;
+  /** className */
+  className?: string;
 };
 /**
  * 메모 리스트 컴포넌트
@@ -118,9 +120,10 @@ const MemoList: FC<MemoListProps> = ({
   items,
   onSelected,
   selectedItemId = -1,
+  className,
 }) => {
   return (
-    <MemoListContainer>
+    <MemoListContainer className={className}>
       {items.length != 0 ? (
         items.map((item, idx) => (
           <MemoListItem
