@@ -2,6 +2,9 @@ import { Theme } from "@emotion/react";
 
 declare module "@emotion/react" {
   export interface Theme {
+    size: {
+      maxWidth: number;
+    };
     color: {
       primary: string;
     };
@@ -20,6 +23,7 @@ declare module "@emotion/react" {
 }
 
 export const defaultTheme: Theme = {
+  size: { maxWidth: 1024 },
   color: {
     primary: "#e6b1b1",
   },

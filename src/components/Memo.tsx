@@ -1,5 +1,4 @@
-import { css } from "@emotion/core";
-import { useTheme } from "@emotion/react";
+import { useTheme, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { FC } from "react";
 import Button from "./Button";
@@ -11,6 +10,7 @@ type MemoContainerProps = {
 };
 const MemoContainer = styled.div<MemoContainerProps>((props) => ({
   backgroundColor: props.bgColor,
+  flexGrow: 1,
 }));
 const inputBase = css({
   backgroundColor: "transparent",
@@ -97,7 +97,14 @@ const Memo: FC<MemoProps> = ({
 }) => {
   const theme = useTheme();
   return (
-    <>
+    <div
+      css={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        border: "1px solid #ccc",
+      }}
+    >
       <ColorSelect onSelected={onChangeBgColor} selected={bgColor} />
       <MemoContainer bgColor={theme.memo.color[bgColor]}>
         <MemoTitleInput
@@ -111,7 +118,7 @@ const Memo: FC<MemoProps> = ({
           onChange={({ target }) => onChangeBody(target.value)}
         />
       </MemoContainer>
-    </>
+    </div>
   );
 };
 

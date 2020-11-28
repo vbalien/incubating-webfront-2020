@@ -41,9 +41,6 @@ const MemoListItemContainer = styled.li<MemoListItemContainerProps>(
     "&:hover": {
       filter: "brightness(95%)",
     },
-    "&:last-child": {
-      borderBottom: "none",
-    },
     "&::before": {
       display: "block",
       float: "left",
