@@ -1,4 +1,4 @@
-import { useTheme } from "@emotion/react";
+import { Theme, useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Button, Icon } from "components";
 import React, { FC } from "react";
@@ -23,6 +23,7 @@ export type HeaderProps = {
 };
 const Header: FC<HeaderProps> = ({ onToggleSidebar, onToggleDarkMode }) => {
   const theme = useTheme();
+
   return (
     <Container>
       <div
@@ -43,7 +44,9 @@ const Header: FC<HeaderProps> = ({ onToggleSidebar, onToggleDarkMode }) => {
         >
           <Icon icon="menu" size="auto" />
         </Button>
-        <Title>Memo App</Title>
+        <Title css={(theme: Theme) => ({ color: theme.app.textColor })}>
+          Memo App
+        </Title>
         <Button
           rounded
           flat

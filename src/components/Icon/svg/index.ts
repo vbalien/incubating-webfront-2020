@@ -4,3 +4,4 @@ export { ReactComponent as menu } from "./menu.svg";
 export { ReactComponent as search } from "./search.svg";
 export { ReactComponent as darkmode } from "./darkmode.svg";
 export { ReactComponent as check } from "./check.svg";
+export { ReactComponent as xmark } from "./xmark.svg";

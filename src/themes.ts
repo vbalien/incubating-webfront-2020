@@ -10,11 +10,15 @@ declare module "@emotion/react" {
     };
     app: {
       backgroundColor: string;
+      hoverBackgroundColor: string;
+      textColor: string;
     };
     button: {
-      textColor: string;
       backgroundColor: string;
       borderColor: string;
+    };
+    filter: {
+      hover: string;
     };
     memo: {
       color: [string, string, string, string, string];
@@ -29,11 +33,15 @@ export const defaultTheme: Theme = {
   },
   app: {
     backgroundColor: "#fff",
+    hoverBackgroundColor: "#eee",
+    textColor: "#000",
   },
   button: {
     backgroundColor: "#fff",
     borderColor: "#888",
-    textColor: "#000",
+  },
+  filter: {
+    hover: "brightness(90%)",
   },
   memo: {
     color: ["#E0BBE4", "#957DAD", "#D291BC", "#FEC8D8", "#FFDFD3"],
@@ -44,5 +52,14 @@ export const darkTheme: Theme = {
   ...defaultTheme,
   app: {
     backgroundColor: "#000",
+    textColor: "#888",
+    hoverBackgroundColor: "#333",
+  },
+  filter: {
+    hover: "brightness(120%)",
+  },
+  button: {
+    backgroundColor: "#000",
+    borderColor: "#888",
   },
 };

@@ -1,3 +1,4 @@
+import { Theme } from "@emotion/react";
 import React, { FC } from "react";
 import * as icons from "./svg";
 
@@ -17,15 +18,16 @@ export type IconProps = {
 /**
  * 아이콘 컴포넌트
  */
-const Icon: FC<IconProps> = ({ icon, color = "#000", size = 24 }) => {
+const Icon: FC<IconProps> = ({ icon, color, size = 24 }) => {
   const SVGElement = icons[icon];
   return (
     <SVGElement
-      css={{
-        fill: color,
+      css={(theme: Theme) => ({
+        transition: "fill 0.3s",
+        fill: color || theme.app.textColor,
         width: size,
         height: "auto",
-      }}
+      })}
     />
   );
 };

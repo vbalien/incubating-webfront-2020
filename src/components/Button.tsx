@@ -45,8 +45,8 @@ const Button: FC<ButtonProps> = ({
       css={{
         backgroundColor: primary
           ? theme.color.primary
-          : theme.button.backgroundColor,
-        color: primary ? "#fff" : theme.button.textColor,
+          : theme.app.backgroundColor,
+        color: primary ? "#fff" : theme.app.textColor,
         borderColor: flat ? "transparent" : theme.button.borderColor,
         borderWidth: 1,
         borderStyle: "solid",
@@ -59,7 +59,10 @@ const Button: FC<ButtonProps> = ({
         width: width,
         height: height,
         "&:hover": {
-          filter: "brightness(90%)",
+          backgroundColor: primary
+            ? theme.color.primary
+            : theme.app.hoverBackgroundColor,
+          filter: primary ? theme.filter.hover : "none",
         },
         fontSize: (() => {
           switch (size) {

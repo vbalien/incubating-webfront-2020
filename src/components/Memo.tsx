@@ -1,9 +1,9 @@
 import { useTheme, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { FC } from "react";
+import { MemoColor } from "repo/memo";
 import Button from "./Button";
 import Icon from "./Icon/Icon";
-import { MemoColor } from "./MemoList";
 
 type MemoContainerProps = {
   bgColor: string;
@@ -55,13 +55,17 @@ const ColorSelect: FC<ColorSelectProps> = ({ onSelected, selected }) => {
         <li key={id}>
           <Button
             onClick={() => onSelected(id)}
-            css={{ backgroundColor: color, margin: 10 }}
+            css={{
+              backgroundColor: color,
+              margin: 10,
+              "&:hover": { backgroundColor: color, filter: theme.filter.hover },
+            }}
             rounded
             shadow
             width={40}
             height={40}
           >
-            {id === selected && <Icon icon="check" size={19} />}
+            {id === selected && <Icon icon="check" size={19} color="#000" />}
           </Button>
         </li>
       ))}
@@ -76,6 +80,8 @@ export type MemoProps = {
   onChangeBody?: (body: string) => void;
   /** 배경색 변경 이벤트 콜백 */
   onChangeBgColor?: (color: MemoColor) => void;
+  /** 블러 이벤트 */
+  onBlur?: () => void;
   /** 배경색 설정 */
   bgColor?: MemoColor;
   /** 제목 설정 */
@@ -94,6 +100,7 @@ const Memo: FC<MemoProps> = ({
   onChangeBgColor,
   onChangeBody,
   onChangeTitle,
+  onBlur,
 }) => {
   const theme = useTheme();
   return (
@@ -102,7 +109,6 @@ const Memo: FC<MemoProps> = ({
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        border: "1px solid #ccc",
       }}
     >
       <ColorSelect onSelected={onChangeBgColor} selected={bgColor} />
@@ -111,11 +117,13 @@ const Memo: FC<MemoProps> = ({
           placeholder="제목을 입력해주세요..."
           value={title}
           onChange={({ target }) => onChangeTitle(target.value)}
+          onBlur={onBlur}
         />
         <MemoBodyEditor
           placeholder="내용을 입력해주세요..."
           value={body}
           onChange={({ target }) => onChangeBody(target.value)}
+          onBlur={onBlur}
         />
       </MemoContainer>
     </div>

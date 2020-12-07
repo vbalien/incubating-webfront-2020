@@ -1,20 +1,10 @@
 import { useTheme } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { FC } from "react";
+import { MemoColor, MemoItem } from "repo/memo";
+import Button from "./Button";
+import Icon from "./Icon/Icon";
 
-/** 메모 데이터 구조 정의 (수정가능) */
-export type MemoColor = null | 0 | 1 | 2 | 3 | 4;
-
-export interface MemoItem {
-  /** 고유 ID */
-  id: number;
-  /** 제목 */
-  title: string;
-  /** 내용 */
-  body: string;
-  /** 메모 색상 */
-  color: MemoColor;
-}
 const MemoListContainer = styled.ul({
   width: 250,
   height: "100%",
@@ -23,7 +13,6 @@ const MemoListContainer = styled.ul({
 });
 type MemoListItemContainerProps = {
   memocolor: string;
-  selected?: boolean;
 };
 const MemoListItemContainer = styled.li<MemoListItemContainerProps>(
   (props) => ({
@@ -36,10 +25,10 @@ const MemoListItemContainer = styled.li<MemoListItemContainerProps>(
     position: "relative",
     userSelect: "none",
     transition: "all 0.3s",
-    backgroundColor: "#fff",
-    filter: props.selected && "brightness(95%)",
     "&:hover": {
-      filter: "brightness(95%)",
+      button: {
+        display: "block",
+      },
     },
     "&::before": {
       display: "block",
@@ -77,6 +66,8 @@ export type MemoListItemProps = {
   selected?: boolean;
   /** 클릭 이벤트 */
   onClick: (event: React.MouseEvent<HTMLLIElement, MouseEvent>) => void;
+  /** 삭제클릭 이벤트 */
+  onDelete: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 /**
  * 메모 리스트 아이템 컴포넌트
@@ -86,19 +77,50 @@ const MemoListItem: FC<MemoListItemProps> = ({
   body,
   color,
   onClick,
+  onDelete,
   selected,
 }) => {
   const theme = useTheme();
   return (
     <MemoListItemContainer
-      selected={selected}
       memocolor={color !== null ? theme.memo.color[color] : "transparent"}
       onClick={onClick}
+      css={{
+        backgroundColor: selected
+          ? theme.app.hoverBackgroundColor
+          : theme.app.backgroundColor,
+        color: theme.app.textColor,
+        "&:hover": {
+          backgroundColor: theme.app.hoverBackgroundColor,
+        },
+      }}
     >
       <div css={{ padding: 10 }}>
-        <H4>{title}</H4>
-        <H5>{body}</H5>
+        <H4>{title || "빈 메모"}</H4>
+        <H5>{body || "빈 내용"}</H5>
       </div>
+      {onDelete && (
+        <Button
+          flat
+          rounded
+          onClick={(e) => {
+            onDelete(e);
+            e.stopPropagation();
+          }}
+          width={25}
+          height={25}
+          css={{
+            padding: 3,
+            position: "absolute",
+            right: 5,
+            top: 5,
+            display: "none",
+            backgroundColor: "transparent",
+          }}
+        >
+          <Icon icon="xmark" size={16} color="#888" />
+        </Button>
+      )}
     </MemoListItemContainer>
   );
 };
@@ -108,6 +130,8 @@ export type MemoListProps = {
   items: MemoItem[];
   /** 선택 이벤트 */
   onSelected?: (idx: number, item: MemoItem) => void;
+  /** 삭제 이벤트 */
+  onDelete?: (idx: number, item: MemoItem) => void;
   /** 선택된 항목 ID 설정 */
   selectedItemId?: number;
   /** className */
@@ -119,6 +143,7 @@ export type MemoListProps = {
 const MemoList: FC<MemoListProps> = ({
   items,
   onSelected,
+  onDelete,
   selectedItemId = -1,
   className,
 }) => {
@@ -131,6 +156,7 @@ const MemoList: FC<MemoListProps> = ({
             {...item}
             selected={selectedItemId === item.id}
             onClick={() => onSelected(idx, item)}
+            onDelete={() => onDelete(idx, item)}
           />
         ))
       ) : (
@@ -139,6 +165,7 @@ const MemoList: FC<MemoListProps> = ({
           body="메모를 추가해주세요."
           color={null}
           onClick={undefined}
+          onDelete={undefined}
         />
       )}
     </MemoListContainer>

@@ -4,6 +4,8 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
+const isDevelopment = process.env.NODE_ENV !== "production";
+
 const config: webpack.Configuration = {
   module: {
     rules: [
@@ -43,7 +45,7 @@ const config: webpack.Configuration = {
               // plugin-proposal-decorators is only needed if you're using experimental decorators in TypeScript
               ["@babel/plugin-proposal-decorators", { legacy: true }],
               ["@babel/plugin-proposal-class-properties", { loose: true }],
-              "react-hot-loader/babel",
+              isDevelopment && require.resolve("react-refresh/babel"),
             ],
           },
         },

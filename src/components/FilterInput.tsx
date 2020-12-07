@@ -1,3 +1,4 @@
+import { Theme } from "@emotion/react";
 import React, { FC } from "react";
 import Icon from "./Icon/Icon";
 
@@ -20,14 +21,15 @@ const FilterInput: FC<FilterInputProps> = ({ onChange }) => {
       }}
     >
       <input
-        css={{
+        css={(theme: Theme) => ({
           height: "100%",
           fontsize: "1.8em",
           flexGrow: 1,
           border: "none",
           outline: "none",
           backgroundColor: "transparent",
-        }}
+          color: theme.app.textColor,
+        })}
         onChange={onChange}
         placeholder="필터링..."
       />

@@ -1,14 +1,14 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import store from "store";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { defaultTheme } from "themes";
-import { ThemeProvider } from "@emotion/react";
+import { Provider as ReduxProvider } from "react-redux";
 
 ReactDOM.render(
-  <ThemeProvider theme={defaultTheme}>
+  <ReduxProvider store={store}>
     <App />
-  </ThemeProvider>,
+  </ReduxProvider>,
   document.getElementById("root")
 );
