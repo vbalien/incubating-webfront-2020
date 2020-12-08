@@ -11,6 +11,8 @@ type MemoContainerProps = {
 const MemoContainer = styled.div<MemoContainerProps>((props) => ({
   backgroundColor: props.bgColor,
   flexGrow: 1,
+  display: "flex",
+  flexDirection: "column",
 }));
 const inputBase = css({
   backgroundColor: "transparent",
@@ -23,6 +25,7 @@ const inputBase = css({
 const MemoTitleInput = styled.input(
   {
     fontSize: "1.8em",
+    flexGrow: 1,
   },
   inputBase
 );
