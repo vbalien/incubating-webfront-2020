@@ -1,6 +1,6 @@
 import { Memo } from "components";
 import { useEditableMemo } from "hooks/useEditableMemo";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { updateMemo } from "slices/memoSlice";
@@ -9,6 +9,9 @@ const MemoPage: FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const [memoItem, setMemoItem] = useEditableMemo(Number.parseInt(id));
+  useEffect(() => {
+    dispatch(updateMemo({ ...memoItem }));
+  }, [id]);
   return (
     <>
       {

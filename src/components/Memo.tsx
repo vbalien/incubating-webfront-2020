@@ -1,6 +1,6 @@
 import { useTheme, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { MemoColor } from "repo/memo";
 import Button from "./Button";
 import Icon from "./Icon/Icon";
@@ -106,6 +106,11 @@ const Memo: FC<MemoProps> = ({
   onBlur,
 }) => {
   const theme = useTheme();
+  const onBlurRef = React.useRef<() => void>();
+  useEffect(() => {
+    onBlurRef.current = onBlur;
+  }, [onBlur]);
+  useEffect(() => () => onBlurRef.current(), []);
   return (
     <div
       css={{
