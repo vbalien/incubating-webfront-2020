@@ -46,7 +46,7 @@ const config: webpack.Configuration = {
               ["@babel/plugin-proposal-decorators", { legacy: true }],
               ["@babel/plugin-proposal-class-properties", { loose: true }],
               isDevelopment && require.resolve("react-refresh/babel"),
-            ],
+            ].filter(Boolean),
           },
         },
       },

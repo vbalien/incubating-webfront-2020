@@ -21,9 +21,11 @@ export function initRepo(): Promise<void> {
       resolve();
     };
     idbRequest.onupgradeneeded = (e) => {
+      const transaction = (<IDBOpenDBRequest>e.target).transaction;
       db = (<IDBOpenDBRequest>e.target).result;
       db.createObjectStore("memos", { keyPath: "id", autoIncrement: true });
-      resolve();
+
+      transaction.oncomplete = () => resolve();
     };
     idbRequest.onerror = (err) => {
       reject(err);
