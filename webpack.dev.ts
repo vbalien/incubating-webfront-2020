@@ -9,7 +9,7 @@ export default merge(common, {
   devtool: "inline-source-map",
   devServer: {
     hot: true,
-    contentBase: "./dist",
+    contentBase: "./docs",
     overlay: true,
   },
   plugins: [
